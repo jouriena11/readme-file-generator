@@ -1,0 +1,14 @@
+{
+  "name": "readme-file-generator",
+  "version": "1.0.0",
+  "description": "A node.js command-line application that automatically generates a readme.md file based on prompted inputs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Piyawit Teeraprasert",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "8.2.4"
+  }
+}
