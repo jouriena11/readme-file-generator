@@ -1,6 +1,7 @@
 // Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
+// const generateMarkdown = require('./utils/generateMarkdown')
 
 
 // Create an array of questions for user input
@@ -39,7 +40,7 @@ const questions = [
         type: 'list',
         message: "what's your license type?",
         name: 'license',
-        choices: ['Apache 2.0', 'GNU GPL v3', 'MIT', 'Unlicense']
+        choices: ['Apache 2.0', 'GPLv3', 'MIT', 'Unlicense']
     },
     {
         type: "input",
@@ -65,7 +66,7 @@ function writeToFile(fileName, data) {
 function createLicenseBadge(license) {
     if(license == 'Apache 2.0') {
         return `[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
-    } else if(license == 'GNU GPL v3') {
+    } else if(license == 'GPLv3') {
         return `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`
     } else if(license == 'MIT') {
         return `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
@@ -79,7 +80,7 @@ function init() {
     inquirer
         .prompt(questions)
         .then((response) => {
-            const details = {
+            const data = {
                 title: response.title,
                 description: response.title,
                 installation: response.installation,
@@ -91,11 +92,13 @@ function init() {
                 email: response.email
             }
     
-    const {title, description, installation, usage, license, contribution, tests, github, email} = details;
- 
+    const {title, description, installation, usage, license, contribution, tests, github, email} = data;
+    // generateMarkdown(data);
+
     // TODO: to add walkthrough video link -- Line 121
     const readmeInfo = 
-`${createLicenseBadge(license)}
+`${createLicenseBadge(license)}<br>
+This application is covered under ${license} license.<br>
     
 # **${title}**
 
@@ -117,8 +120,6 @@ ${installation}
 ---
 ## **Usage**
 ${usage}
-
-Click this [link]() for a walkthrough video of this application.
 
 ---
 ## **Contributions**
